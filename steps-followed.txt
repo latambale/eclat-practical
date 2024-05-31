@@ -1,0 +1,85 @@
+** Minikube Installation:
+
+Followed this Web Resource:
+https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download
+
+Pre-Requisites:
+Docker - Already installed
+
+** Node JS Application:
+
+Followed this Web Resource:
+https://www.w3schools.com/nodejs/nodejs_get_started.asp
+
+Followed this Web Resource:
+https://www.devopshint.com/how-to-create-helm-chart-for-nodejs-app/
+
+
+** Nginx Ingress Installation on Kubernetes:
+>> helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+>> helm repo update
+
+>> helm install nginx-ingress ingress-nginx/ingress-nginx
+
+Updated minikube ip in hosts file to access the minikube on browser:
+>> minikube ip
+192.168.49.2
+
+
+** Creating a NodeJS Application:
+
+https://www.w3schools.com/nodejs/nodejs_get_started.asp
+
+** Create a Docker File for the application
+1. Wrote code for nodejs application
+2. Created a Dockerfile for the same
+
+** To build the docker image:
+>> docker build -t hello-world-node .
+
+** To run the container: (Optional)
+>> docker run -p 3000:3000 hello-world-node
+
+** Push the Docker Image:
+>> docker login
+>> docker tag hello-world-node saurabhlatambale/eclat:latest
+>> docker push saurabhlatambale/eclat:latest
+
+
+Node Js Deployment Using Helm Charts:
+
+1. Created a new cluster: 
+Using below command: 
+
+>> minikube start
+
+2. Checked the status of Kubernetes:
+
+>> minikube status
+
+3. Installed kubectl was on old version so I updated it using below command:
+
+>> minikube kubectl -- get pods -A
+
+4. I wanted to use kubectl commands directly instead of typing minikube everytime, so I am configuring minikube with kubectl to use it directly:
+
+>> kubectl config use-context minikube
+
+Installing Helm:
+
+https://helm.sh/docs/intro/install/
+
+>> choco install kubernetes-helm
+
+Following below web-resource to create a Helm Chart for NodeJS App:
+
+https://www.devopshint.com/how-to-create-helm-chart-for-nodejs-app/
+
+** Creating a directory for node-app-chart
+
+>> helm create node-app-chart
+
+** Edited below file:
+>> values.yaml
+
+>> helm install node-app ./path-to-your-helm-chart
